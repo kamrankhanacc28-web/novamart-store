@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#102a24">
+  <meta name="description" content="Discover everyday essentials at NovaMart. Browse featured products and place an order through WhatsApp.">
+  <title>NovaMart — Everyday finds, better living</title>
+  <style>
+    :root {
+      --ink: #17251f;
+      --muted: #66736c;
+      --green: #163c31;
+      --green-2: #245848;
+      --lime: #d7f36c;
+      --cream: #f7f7f2;
+      --paper: #ffffff;
+      --line: #e5e9e2;
+      --shadow: 0 18px 50px rgba(23, 37, 31, .10);
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--cream); color: var(--ink); }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    a { color: inherit; text-decoration: none; }
+    .announcement { background: var(--green); color: white; text-align: center; padding: 10px 16px; font-size: 12px; letter-spacing: .04em; }
+    .announcement strong { color: var(--lime); font-weight: 800; }
+    .container { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
+    header { background: rgba(247,247,242,.94); border-bottom: 1px solid rgba(23,37,31,.07); position: sticky; top: 0; z-index: 10; backdrop-filter: blur(16px); }
+    .nav { min-height: 78px; display: flex; align-items: center; gap: 28px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 900; letter-spacing: -.06em; white-space: nowrap; }
+    .brand-mark { width: 35px; height: 35px; border-radius: 12px; display: grid; place-items: center; background: var(--lime); color: var(--green); font-size: 18px; transform: rotate(-5deg); }
+    .nav-links { display: flex; align-items: center; gap: 24px; margin-left: auto; color: #58665f; font-size: 13px; font-weight: 650; }
+    .nav-links a:hover { color: var(--green); }
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
+    .icon-btn { border: 1px solid var(--line); background: white; color: var(--ink); height: 43px; padding: 0 14px; border-radius: 99px; display: inline-flex; align-items: center; gap: 9px; font-weight: 750; font-size: 13px; }
+    .icon-btn:hover { border-color: #b8c4b8; }
+    .cart-count { display: grid; place-items: center; width: 21px; height: 21px; border-radius: 50%; color: var(--green); background: var(--lime); font-size: 11px; font-weight: 900; }
+    .hero { padding: 34px 0 48px; }
+    .hero-panel { display: grid; grid-template-columns: 1.05fr .95fr; min-height: 470px; overflow: hidden; border-radius: 30px; background: #e9eddf; }
+    .hero-copy { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: clamp(32px, 6vw, 75px); }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; color: var(--green-2); font-size: 11px; letter-spacing: .15em; text-transform: uppercase; font-weight: 900; }
+    .eyebrow-dot { width: 7px; height: 7px; background: #a2c63e; border-radius: 50%; }
+    h1 { margin: 20px 0 16px; max-width: 540px; font-size: clamp(42px, 5vw, 68px); line-height: .99; letter-spacing: -.065em; font-weight: 900; }
+    h1 span { color: #477660; }
+    .hero-copy p { color: #5b6c60; line-height: 1.75; font-size: 15px; max-width: 405px; margin: 0 0 27px; }
+    .primary-btn { border: none; border-radius: 99px; padding: 15px 22px; display: inline-flex; align-items: center; justify-content: center; gap: 12px; background: var(--green); color: white; font-weight: 800; font-size: 13px; box-shadow: 0 9px 20px rgba(22,60,49,.15); transition: transform .18s, background .18s; }
+    .primary-btn:hover { transform: translateY(-2px); background: #245848; }
+    .hero-image { min-height: 360px; position: relative; background: #d5ddcf; }
+    .hero-image img { width: 100%; height: 100%; min-height: 470px; object-fit: cover; display: block; }
+    .hero-badge { position: absolute; right: 24px; bottom: 24px; background: var(--lime); color: var(--green); border-radius: 18px; padding: 16px 19px; box-shadow: var(--shadow); transform: rotate(3deg); }
+    .hero-badge small { display: block; font-size: 10px; text-transform: uppercase; font-weight: 900; letter-spacing: .12em; }
+    .hero-badge strong { display: block; margin-top: 4px; font-size: 20px; letter-spacing: -.04em; }
+    .trust-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding: 22px 0 12px; }
+    .trust-item { display: flex; gap: 12px; align-items: center; padding: 10px 14px; }
+    .trust-icon { flex: 0 0 42px; height: 42px; display: grid; place-items: center; border-radius: 14px; background: white; border: 1px solid var(--line); font-size: 18px; }
+    .trust-item strong { font-size: 12px; display: block; }
+    .trust-item span { font-size: 11px; color: var(--muted); display: block; margin-top: 4px; }
+    section.products-section { padding: 55px 0 80px; }
+    .section-top { display: flex; gap: 24px; align-items: flex-end; justify-content: space-between; margin-bottom: 24px; }
+    .section-kicker { color: #6c8a72; font-size: 11px; text-transform: uppercase; font-weight: 900; letter-spacing: .15em; }
+    h2 { font-size: clamp(30px, 3.6vw, 43px); line-height: 1.08; letter-spacing: -.055em; margin: 9px 0 0; }
+    .section-desc { margin: 10px 0 0; color: var(--muted); font-size: 13px; line-height: 1.6; max-width: 500px; }
+    .search-wrap { width: min(280px, 100%); display: flex; gap: 10px; align-items: center; background: white; border: 1px solid var(--line); border-radius: 999px; padding: 0 16px; height: 46px; }
+    .search-wrap span { color: #758177; font-size: 18px; }
+    .search-wrap input { width: 100%; border: 0; outline: none; color: var(--ink); background: transparent; font-size: 12px; }
+    .category-row { display: flex; flex-wrap: wrap; gap: 9px; margin: 26px 0 25px; }
+    .category-btn { background: transparent; border: 1px solid #dce2d9; color: #607067; padding: 10px 16px; border-radius: 99px; font-size: 12px; font-weight: 750; }
+    .category-btn:hover, .category-btn.active { background: var(--green); color: white; border-color: var(--green); }
+    .products-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+    .product-card { border-radius: 20px; border: 1px solid #e9ece6; overflow: hidden; background: white; transition: transform .2s, box-shadow .2s; min-width: 0; }
+    .product-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .product-image { position: relative; background: #eef0e9; aspect-ratio: 1 / .92; overflow: hidden; }
+    .product-image img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .4s; }
+    .product-card:hover .product-image img { transform: scale(1.045); }
+    .product-tag { position: absolute; top: 12px; left: 12px; border-radius: 99px; padding: 6px 9px; background: rgba(255,255,255,.9); color: #355344; font-size: 9px; text-transform: uppercase; letter-spacing: .07em; font-weight: 900; }
+    .product-content { padding: 15px 15px 16px; }
+    .product-category { font-size: 10px; color: #829087; text-transform: uppercase; letter-spacing: .12em; font-weight: 850; }
+    .product-title { margin: 7px 0 8px; font-size: 14px; font-weight: 800; letter-spacing: -.025em; }
+    .product-foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+    .price { font-size: 16px; font-weight: 900; letter-spacing: -.035em; white-space: nowrap; }
+    .add-btn { width: 36px; height: 36px; flex: 0 0 36px; border: none; border-radius: 12px; background: #e9f3d2; color: var(--green); font-size: 22px; font-weight: 500; transition: background .18s; }
+    .add-btn:hover { background: var(--lime); }
+    .empty-state { padding: 40px 20px; text-align: center; color: var(--muted); background: white; border: 1px dashed #d6ddd4; border-radius: 18px; grid-column: 1 / -1; }
+    .bottom-banner { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 24px; padding: 32px 38px; border-radius: 24px; background: var(--green); color: white; margin-bottom: 75px; }
+    .bottom-banner h3 { margin: 0 0 8px; font-size: 26px; letter-spacing: -.045em; }
+    .bottom-banner p { color: #c7d8cc; margin: 0; font-size: 13px; line-height: 1.6; }
+    .light-btn { border: 0; background: var(--lime); color: var(--green); border-radius: 99px; padding: 14px 20px; font-weight: 900; font-size: 12px; white-space: nowrap; }
+    footer { padding: 28px 0 34px; border-top: 1px solid var(--line); background: #f0f2ea; }
+    .footer-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 30px; }
+    .footer-note { color: #738077; max-width: 430px; font-size: 11px; line-height: 1.75; margin: 13px 0 0; }
+    .footer-right { color: #738077; font-size: 11px; text-align: right; line-height: 1.9; }
+    .cart-overlay { position: fixed; inset: 0; z-index: 50; background: rgba(13,25,20,.48); opacity: 0; pointer-events: none; transition: opacity .22s; }
+    .cart-overlay.open { opacity: 1; pointer-events: auto; }
+    .cart-drawer { position: absolute; right: 0; top: 0; height: 100%; width: min(450px, 100%); background: var(--cream); padding: 24px; display: flex; flex-direction: column; transform: translateX(100%); transition: transform .25s ease; box-shadow: -20px 0 60px rgba(0,0,0,.12); }
+    .cart-overlay.open .cart-drawer { transform: translateX(0); }
+    .cart-head { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); padding-bottom: 18px; }
+    .cart-head h2 { font-size: 25px; margin: 0; }
+    .close-btn { border: 1px solid var(--line); background: white; width: 38px; height: 38px; border-radius: 50%; font-size: 20px; }
+    .cart-items { overflow-y: auto; flex: 1; padding: 12px 0; }
+    .cart-empty { color: var(--muted); text-align: center; margin: 50px 0; font-size: 13px; }
+    .cart-line { display: grid; grid-template-columns: 66px 1fr auto; gap: 12px; align-items: center; padding: 13px 0; border-bottom: 1px solid var(--line); }
+    .cart-line img { width: 66px; height: 66px; object-fit: cover; border-radius: 14px; background: #e8ece3; }
+    .cart-line-title { font-size: 12px; font-weight: 850; margin-bottom: 5px; }
+    .cart-line-price { font-size: 12px; font-weight: 800; }
+    .qty-row { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+    .qty-btn { width: 25px; height: 25px; border: 1px solid var(--line); background: white; border-radius: 8px; font-size: 15px; }
+    .qty-number { font-size: 11px; font-weight: 800; min-width: 10px; text-align: center; }
+    .remove-btn { border: none; background: none; color: #8a978f; font-size: 11px; padding: 4px; }
+    .cart-summary { border-top: 1px solid var(--line); padding-top: 17px; }
+    .summary-row { display: flex; align-items: center; justify-content: space-between; margin: 10px 0; color: var(--muted); font-size: 12px; }
+    .summary-row.total { font-size: 17px; color: var(--ink); font-weight: 900; padding-top: 10px; border-top: 1px dashed #d8ded5; }
+    .checkout-btn { width: 100%; margin-top: 13px; padding: 16px; }
+    .checkout-help { color: #7b877e; font-size: 10px; line-height: 1.6; text-align: center; margin: 10px 0 0; }
+    .toast { position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px); opacity: 0; pointer-events: none; z-index: 80; background: var(--green); color: white; padding: 13px 18px; border-radius: 99px; box-shadow: var(--shadow); font-size: 12px; font-weight: 750; transition: .2s; max-width: calc(100% - 30px); text-align: center; }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+    @media (max-width: 950px) { .nav { gap: 16px; } .nav-links { gap: 14px; } .hero-panel { min-height: 420px; } .hero-image img { min-height: 420px; } .products-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    @media (max-width: 720px) { .container { width: min(100% - 28px, 560px); } .nav { min-height: 68px; gap: 12px; } .brand { font-size: 18px; } .nav-links { display: none; } .nav-actions { margin-left: auto; } .icon-btn { height: 40px; padding: 0 11px; } .hero { padding-top: 18px; } .hero-panel { grid-template-columns: 1fr; } .hero-copy { padding: 32px 26px 30px; } h1 { font-size: clamp(43px, 12vw, 60px); } .hero-copy p { font-size: 13px; } .hero-image { min-height: 260px; max-height: 300px; } .hero-image img { min-height: 300px; } .hero-badge { right: 16px; bottom: 16px; padding: 12px 15px; } .trust-row { gap: 7px; padding-top: 17px; } .trust-item { padding: 6px 0; gap: 7px; align-items: flex-start; } .trust-icon { flex-basis: 32px; height: 32px; font-size: 15px; border-radius: 11px; } .trust-item strong { font-size: 10px; } .trust-item span { font-size: 9px; line-height: 1.4; } section.products-section { padding: 38px 0 48px; } .section-top { display: block; } .search-wrap { margin-top: 20px; width: 100%; } .products-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; } .product-content { padding: 12px; } .product-title { font-size: 12px; } .price { font-size: 14px; } .product-tag { top: 8px; left: 8px; font-size: 8px; } .category-row { gap: 7px; margin: 20px 0; } .category-btn { padding: 9px 12px; font-size: 11px; } .bottom-banner { display: block; padding: 27px 23px; margin-bottom: 46px; } .bottom-banner h3 { font-size: 23px; } .light-btn { margin-top: 19px; } .footer-row { display: block; } .footer-right { text-align: left; margin-top: 18px; } }
+    @media (max-width: 370px) { .brand { font-size: 16px; } .brand-mark { width: 31px; height: 31px; } .icon-btn { font-size: 11px; padding: 0 9px; } .products-grid { gap: 8px; } .product-content { padding: 10px; } }
+  </style>
+</head>
+<body>
+  <div class="announcement">A little something for your everyday <strong>·</strong> Easy ordering on WhatsApp</div>
+  <header>
+    <div class="container nav">
+      <a href="#home" class="brand" aria-label="NovaMart home"><span class="brand-mark">N</span><span>nova<span style="color:#6b8f75">mart</span></span></a>
+      <nav class="nav-links" aria-label="Main navigation"><a href="#home">Home</a><a href="#shop">Shop all</a><a href="#why-us">Why NovaMart</a></nav>
+      <div class="nav-actions">
+        <button class="icon-btn" id="open-cart" aria-label="Open shopping cart">Bag <span class="cart-count" id="cart-count">0</span></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero container">
+      <div class="hero-panel">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="eyebrow-dot"></span> Your everyday edit</div>
+          <h1>Good things.<br><span>Better living.</span></h1>
+          <p>Thoughtful finds for your everyday life. Browse our collection, add your favourites to the bag, and send your order through WhatsApp.</p>
+          <a href="#shop" class="primary-btn">Explore the collection <span aria-hidden="true">↘</span></a>
+        </div>
+        <div class="hero-image">
+          <img src="https://images.unsplash.com/photo-1490312278390-ab64016e0aa9?auto=format&fit=crop&w=1200&q=85" alt="Carefully arranged everyday lifestyle products" onerror="this.style.display='none'">
+          <div class="hero-badge"><small>Small details</small><strong>Big difference.</strong></div>
+        </div>
+      </div>
+      <div class="trust-row" id="why-us">
+        <div class="trust-item"><div class="trust-icon">✦</div><div><strong>Curated finds</strong><span>Useful things, chosen well</span></div></div>
+        <div class="trust-item"><div class="trust-icon">↗</div><div><strong>Simple ordering</strong><span>Place orders through WhatsApp</span></div></div>
+        <div class="trust-item"><div class="trust-icon">♡</div><div><strong>Personal support</strong><span>Ask us before you order</span></div></div>
+      </div>
+    </section>
+
+    <section class="products-section" id="shop">
+      <div class="container">
+        <div class="section-top">
+          <div><div class="section-kicker">The good stuff</div><h2>Find your new favourite.</h2><p class="section-desc">Explore the collection and add anything you like to your shopping bag.</p></div>
+          <label class="search-wrap"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Search products..." aria-label="Search products"></label>
+        </div>
+        <div class="category-row" id="categories" aria-label="Filter products"></div>
+        <div class="products-grid" id="products-grid" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="bottom-banner">
+        <div><h3>Need a hand choosing?</h3><p>Message us on WhatsApp with your questions before placing an order.</p></div>
+        <button class="light-btn" id="ask-whatsapp">Chat with us ↗</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <div><a href="#home" class="brand"><span class="brand-mark">N</span><span>nova<span style="color:#6b8f75">mart</span></span></a><p class="footer-note">A demo storefront starter. Replace the sample products, prices, images and WhatsApp number with your own details before publishing. Orders and payment are confirmed directly with the seller.</p></div>
+      <div class="footer-right">© <span id="year"></span> NovaMart<br>Made for everyday discovery.</div>
+    </div>
+  </footer>
+
+  <div class="cart-overlay" id="cart-overlay" aria-hidden="true">
+    <aside class="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+      <div class="cart-head"><h2 id="cart-title">Your bag <span style="color:#8a998e;font-weight:600" id="cart-item-label">(0 items)</span></h2><button class="close-btn" id="close-cart" aria-label="Close cart">×</button></div>
+      <div class="cart-items" id="cart-items"></div>
+      <div class="cart-summary">
+        <div class="summary-row"><span>Subtotal</span><strong id="subtotal">Rs 0</strong></div>
+        <div class="summary-row"><span>Delivery</span><span>Confirm on WhatsApp</span></div>
+        <div class="summary-row total"><span>Estimated total</span><strong id="total">Rs 0</strong></div>
+        <button class="primary-btn checkout-btn" id="checkout">Order via WhatsApp <span aria-hidden="true">↗</span></button>
+        <p class="checkout-help">No online payment is collected on this demo site. Confirm stock, delivery charges and payment with the seller on WhatsApp.</p>
+      </div>
+    </aside>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    // IMPORTANT: Replace this with your WhatsApp number using country code and digits only.
+    // Example for Pakistan: 923001234567 (do not include +, spaces or dashes).
+    const WHATSAPP_NUMBER = "923001234567";
+
+    // Edit these sample products to add your own items.
+    // price is a number in Pakistani rupees (PKR).
+    const PRODUCTS = [
+      { id: 1, name: "Studio Wireless Headphones", category: "Tech", price: 5490, tag: "Bestseller", image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=85", alt: "Wireless headphones" },
+      { id: 2, name: "Everyday Minimal Watch", category: "Accessories", price: 3890, tag: "Just in", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=85", alt: "Minimal wristwatch" },
+      { id: 3, name: "Street Classic Sneakers", category: "Fashion", price: 6250, tag: "Popular", image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=85", alt: "Red athletic sneaker" },
+      { id: 4, name: "Everyday Carry Tote", category: "Accessories", price: 2450, tag: "Easy favourite", image: "https://images.unsplash.com/photo-1590870389424-6c0f0d5d1b10?auto=format&fit=crop&w=800&q=85", alt: "Everyday tote bag" },
+      { id: 5, name: "Soft Glow Table Lamp", category: "Home", price: 4290, tag: "Home pick", image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=800&q=85", alt: "Table lamp in a home interior" },
+      { id: 6, name: "Daily Hydration Bottle", category: "Home", price: 1390, tag: "Everyday essential", image: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=800&q=85", alt: "Reusable water bottle" },
+      { id: 7, name: "Weekend Explorer Backpack", category: "Fashion", price: 3590, tag: "Ready to go", image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=85", alt: "Travel backpack" },
+      { id: 8, name: "Classic Sun Shades", category: "Accessories", price: 1790, tag: "Sunny days", image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=800&q=85", alt: "Sunglasses" }
+    ];
+
+    const state = { category: "All", search: "", cart: loadCart() };
+    const grid = document.getElementById("products-grid");
+    const categoryWrap = document.getElementById("categories");
+    const overlay = document.getElementById("cart-overlay");
+    const toastEl = document.getElementById("toast");
+    let toastTimer;
+
+    function money(amount) {
+      return "Rs " + Number(amount).toLocaleString("en-PK");
+    }
+
+    function loadCart() {
+      try {
+        const parsed = JSON.parse(localStorage.getItem("novamart-cart") || "[]");
+        return Array.isArray(parsed) ? parsed.filter(item => Number.isInteger(item.id) && Number.isInteger(item.qty) && item.qty > 0) : [];
+      } catch { return []; }
+    }
+
+    function saveCart() {
+      try { localStorage.setItem("novamart-cart", JSON.stringify(state.cart)); } catch { /* Cart still works for this visit if storage is unavailable. */ }
+    }
+
+    function toast(message) {
+      toastEl.textContent = message;
+      toastEl.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toastEl.classList.remove("show"), 2200);
+    }
+
+    function renderCategories() {
+      const categories = ["All", ...new Set(PRODUCTS.map(product => product.category))];
+      categoryWrap.innerHTML = categories.map(category => `<button type="button" class="category-btn ${state.category === category ? "active" : ""}" data-category="${category}">${category}</button>`).join("");
+      categoryWrap.querySelectorAll("button").forEach(button => {
+        button.addEventListener("click", () => {
+          state.category = button.dataset.category;
+          renderCategories();
+          renderProducts();
+        });
+      });
+    }
+
+    function renderProducts() {
+      const query = state.search.trim().toLowerCase();
+      const visible = PRODUCTS.filter(product => (state.category === "All" || product.category === state.category) && (product.name.toLowerCase().includes(query) || product.category.toLowerCase().includes(query)));
+      if (!visible.length) {
+        grid.innerHTML = `<div class="empty-state">No products found. Try a different search or category.</div>`;
+        return;
+      }
+      grid.innerHTML = visible.map(product => `
+        <article class="product-card">
+          <div class="product-image"><img src="${product.image}" alt="${product.alt}" loading="lazy" onerror="this.style.opacity='.15'"><span class="product-tag">${product.tag}</span></div>
+          <div class="product-content"><div class="product-category">${product.category}</div><h3 class="product-title">${product.name}</h3>
+            <div class="product-foot"><span class="price">${money(product.price)}</span><button class="add-btn" data-add="${product.id}" aria-label="Add ${product.name} to bag">+</button></div>
+          </div>
+        </article>`).join("");
+      grid.querySelectorAll("[data-add]").forEach(button => button.addEventListener("click", () => addToCart(Number(button.dataset.add))));
+    }
+
+    function addToCart(id) {
+      const existing = state.cart.find(item => item.id === id);
+      if (existing) existing.qty += 1;
+      else state.cart.push({ id, qty: 1 });
+      saveCart(); renderCart(); toast("Added to your bag");
+    }
+
+    function changeQty(id, amount) {
+      const item = state.cart.find(cartItem => cartItem.id === id);
+      if (!item) return;
+      item.qty += amount;
+      if (item.qty <= 0) state.cart = state.cart.filter(cartItem => cartItem.id !== id);
+      saveCart(); renderCart();
+    }
+
+    function removeFromCart(id) {
+      state.cart = state.cart.filter(item => item.id !== id);
+      saveCart(); renderCart();
+    }
+
+    function renderCart() {
+      state.cart = state.cart.filter(item => PRODUCTS.some(product => product.id === item.id) && item.qty > 0);
+      const count = state.cart.reduce((sum, item) => sum + item.qty, 0);
+      const subtotal = state.cart.reduce((sum, item) => {
+        const product = PRODUCTS.find(p => p.id === item.id);
+        return sum + (product ? product.price * item.qty : 0);
+      }, 0);
+      document.getElementById("cart-count").textContent = count;
+      document.getElementById("cart-item-label").textContent = `(${count} ${count === 1 ? "item" : "items"})`;
+      document.getElementById("subtotal").textContent = money(subtotal);
+      document.getElementById("total").textContent = money(subtotal);
+      const itemsEl = document.getElementById("cart-items");
+      if (!state.cart.length) {
+        itemsEl.innerHTML = `<div class="cart-empty"><div style="font-size:34px;margin-bottom:12px">♧</div>Your bag is waiting for something good.<br><br><button class="primary-btn" id="browse-products">Browse products</button></div>`;
+        document.getElementById("browse-products").addEventListener("click", () => { closeCart(); document.getElementById("shop").scrollIntoView({ behavior: "smooth" }); });
+        return;
+      }
+      itemsEl.innerHTML = state.cart.map(item => {
+        const product = PRODUCTS.find(p => p.id === item.id);
+        return `<div class="cart-line"><img src="${product.image}" alt="${product.alt}"><div><div class="cart-line-title">${product.name}</div><div class="cart-line-price">${money(product.price * item.qty)}</div><div class="qty-row"><button class="qty-btn" data-minus="${item.id}" aria-label="Decrease quantity">−</button><span class="qty-number">${item.qty}</span><button class="qty-btn" data-plus="${item.id}" aria-label="Increase quantity">+</button><button class="remove-btn" data-remove="${item.id}">Remove</button></div></div></div>`;
+      }).join("");
+      itemsEl.querySelectorAll("[data-minus]").forEach(button => button.addEventListener("click", () => changeQty(Number(button.dataset.minus), -1)));
+      itemsEl.querySelectorAll("[data-plus]").forEach(button => button.addEventListener("click", () => changeQty(Number(button.dataset.plus), 1)));
+      itemsEl.querySelectorAll("[data-remove]").forEach(button => button.addEventListener("click", () => removeFromCart(Number(button.dataset.remove))));
+    }
+
+    function openCart() {
+      overlay.classList.add("open"); overlay.setAttribute("aria-hidden", "false"); document.body.style.overflow = "hidden";
+      document.getElementById("close-cart").focus();
+    }
+    function closeCart() {
+      overlay.classList.remove("open"); overlay.setAttribute("aria-hidden", "true"); document.body.style.overflow = "";
+    }
+
+    function openWhatsApp(message) {
+      if (!/^\d{8,15}$/.test(WHATSAPP_NUMBER) || WHATSAPP_NUMBER === "923001234567") {
+        toast("Please add your own WhatsApp number in index.html first.");
+        return;
+      }
+      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
+
+    function checkout() {
+      if (!state.cart.length) { toast("Your bag is empty"); return; }
+      const lines = state.cart.map(item => {
+        const product = PRODUCTS.find(p => p.id === item.id);
+        return `• ${product.name} × ${item.qty} — ${money(product.price * item.qty)}`;
+      });
+      const subtotal = state.cart.reduce((sum, item) => sum + PRODUCTS.find(p => p.id === item.id).price * item.qty, 0);
+      const message = `Hello NovaMart! I would like to place an order:\n\n${lines.join("\n")}\n\nEstimated subtotal: ${money(subtotal)}\n\nPlease confirm availability, delivery charges, delivery details and payment method.`;
+      openWhatsApp(message);
+    }
+
+    document.getElementById("search").addEventListener("input", event => { state.search = event.target.value; renderProducts(); });
+    document.getElementById("open-cart").addEventListener("click", openCart);
+    document.getElementById("close-cart").addEventListener("click", closeCart);
+    overlay.addEventListener("click", event => { if (event.target === overlay) closeCart(); });
+    document.addEventListener("keydown", event => { if (event.key === "Escape") closeCart(); });
+    document.getElementById("checkout").addEventListener("click", checkout);
+    document.getElementById("ask-whatsapp").addEventListener("click", () => openWhatsApp("Hello NovaMart! I have a question about your products."));
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    renderCategories(); renderProducts(); renderCart();
+  </script>
+</body>
+</html>
